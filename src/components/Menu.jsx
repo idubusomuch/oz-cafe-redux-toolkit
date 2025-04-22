@@ -1,14 +1,17 @@
-import { useState } from "react";
-import Item from "./Item";
-import OrderModal from "./OrderModal";
+import { useState } from 'react';
+import Item from './Item';
+import OrderModal from './OrderModal';
+import { useSelector } from 'react-redux';
 
-function Menu({ menu, cart, setCart }) {
+function Menu() {
+  const menu = useSelector((state) => state.menuReducer);
+
   const [modalOn, setModalOn] = useState(false);
   const [modalMenu, setModalMenu] = useState(null);
   if (!menu)
     return (
-      <div style={{ textAlign: "center", margin: "80px" }}>
-        {" "}
+      <div style={{ textAlign: 'center', margin: '80px' }}>
+        {' '}
         메뉴 정보가 없어요!
       </div>
     );
@@ -36,12 +39,7 @@ function Menu({ menu, cart, setCart }) {
         );
       })}
       {modalOn ? (
-        <OrderModal
-          modalMenu={modalMenu}
-          setModalOn={setModalOn}
-          cart={cart}
-          setCart={setCart}
-        />
+        <OrderModal modalMenu={modalMenu} setModalOn={setModalOn} />
       ) : null}
     </>
   );
