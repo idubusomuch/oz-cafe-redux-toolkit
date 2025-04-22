@@ -1,10 +1,11 @@
 import { useDispatch, useSelector } from 'react-redux';
 import data from '../assets/data';
-import { removeFromCart } from '../redux/redux';
+import { cartSlice, removeFromCart } from '../redux/redux';
 
 function Cart() {
-  const menu = useSelector((state) => state.menuReducer);
-  const cart = useSelector((state) => state.cartReducer);
+  const menu = useSelector((state) => state.menu);
+  const cart = useSelector((state) => state.cart);
+
   if (!menu)
     return (
       <div style={{ textAlign: 'center', margin: '80px' }}>
@@ -53,7 +54,7 @@ function CartItem({ item, options, quantity }) {
       <button
         className="cart-item-delete"
         onClick={() => {
-          dispatch(removeFromCart(item.id));
+          dispatch(cartSlice.actions.removeFromCart(item.id));
         }}>
         삭제
       </button>
